@@ -1,2 +1,2 @@
-# haskel_practice
-haskel_practice
+# Practical tasks in Haskell
+Petrov Andrei
