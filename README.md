@@ -1,2 +1,2 @@
 # Practical tasks in Haskell
-Petrov Andrei
+Contributor: Petrov Andrei
