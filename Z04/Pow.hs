@@ -1,3 +1,5 @@
+module Z04 (pow) where
+
 pow :: (Integral x, Num p) => p -> x -> p
 pow x p
   | p == 0 = 1

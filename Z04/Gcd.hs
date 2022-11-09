@@ -1,3 +1,5 @@
+module Z04 (eGcd) where
+
 eGcd :: Int -> Int -> Int
 eGcd a b
   | a <= 0 = 0
