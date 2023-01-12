@@ -30,7 +30,19 @@ foldToFibonacciFn (prev, curr) = Just (curr, (curr, prev + curr))
 
 foldToFibonacci n = take n $ unfoldr foldToFibonacciFn (0, 1)
 
---06: 
+--06: Expand the number into the Syracuse sequence
+foldToSyracuseFn x
+  | x == 0 = Nothing
+  | x == 1 = Just (x, 0)
+  | even x = Just (x, div x 2)
+  | otherwise = Just (x, 3 * x + 1)
+
+-- collatzFn x acc
+--   | x == 1 = acc
+--   | even x = collatzFn (div x 2) (acc + 1)
+--   | otherwise = collatzFn (3 * x + 1) (acc + 1)
+
+foldToSyracuse = unfoldr foldToSyracuseFn
 
 
 -- TESTING MODULE
@@ -42,4 +54,5 @@ testLesson06 = do
   print ("03: foldBin         ([1,1,0,1,0]):   ", foldBin [1,1,0,1,0])
   print ("04: unfoldToPrimeDivs        (70):   ", unfoldToPrimeDivs 70)
   print ("05: foldToFibonacci          (70):   ", foldToFibonacci 4)
+  print ("06: foldToSyracuse           (70):   ", foldToSyracuse 4)
   print ("-------------------------------")
