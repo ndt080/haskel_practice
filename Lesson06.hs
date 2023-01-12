@@ -47,10 +47,10 @@ foldToSyracuse = unfoldr foldToSyracuseFn
 --07: Express a list of prime numbers not exceeding n through a sweep using the sieve of Eratosthenes
 sieve seq p = filter (\x -> x `mod` p /= 0) seq
   
-unfoldToPrimes m = unfoldr (\(p:rest) -> 
-  if p > m 
+unfoldToPrimes m = unfoldr (\(x:xs) -> 
+  if x > m 
   then Nothing 
-  else Just (p, sieve rest p )) [2..]
+  else Just (x, sieve xs x )) [2..]
 
 -- TESTING MODULE
 testLesson06 :: IO ()
