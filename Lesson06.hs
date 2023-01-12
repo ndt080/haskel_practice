@@ -25,6 +25,12 @@ unfoldToPrimeDivsFn n =
 
 unfoldToPrimeDivs = unfoldr unfoldToPrimeDivsFn
 
+--05: Express the list of the first n Fibonacci numbers through a sweep.
+foldToFibonacciFn (prev, curr) = Just (curr, (curr, prev + curr))
+
+foldToFibonacci n = take n $ unfoldr foldToFibonacciFn (0, 1)
+
+--06: 
 
 
 -- TESTING MODULE
@@ -35,4 +41,5 @@ testLesson06 = do
   print ("02: unfoldToBin              (26):   ", unfoldToBin 26)
   print ("03: foldBin         ([1,1,0,1,0]):   ", foldBin [1,1,0,1,0])
   print ("04: unfoldToPrimeDivs        (70):   ", unfoldToPrimeDivs 70)
+  print ("05: foldToFibonacci          (70):   ", foldToFibonacci 4)
   print ("-------------------------------")
