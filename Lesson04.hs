@@ -1,4 +1,4 @@
-module Lesson04 (eGcd, pow, testLesson04) where
+module Lesson04 (testLesson04) where
 
 import Data.List
 
@@ -28,9 +28,6 @@ tailPowFn x p acc
 
 tailPow :: (Integral x, Num p) => p -> x -> p
 tailPow x p = tailPowFn x p 1
-
--- 03: Calculating Fibonacci numbers in O(log n)
-
 
 -- 04: Perfect numbers
 perfect :: Integral a => a -> Bool
