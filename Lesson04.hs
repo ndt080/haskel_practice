@@ -1,5 +1,7 @@
 module Lesson04 (eGcd, pow, testLesson04) where
 
+import Data.List
+
 -- 01: GCD
 eGcd :: Int -> Int -> Int
 eGcd a b
@@ -27,6 +29,9 @@ tailPowFn x p acc
 tailPow :: (Integral x, Num p) => p -> x -> p
 tailPow x p = tailPowFn x p 1
 
+-- 03: Calculating Fibonacci numbers in O(log n)
+
+
 -- 04: Perfect numbers
 perfect :: Integral a => a -> Bool
 perfect n = n == sum [i | i <- [1..n-1], n `mod` i == 0]
@@ -52,14 +57,32 @@ delannoy n m
       m' = m - 1
     in delannoy n' m + delannoy n' m' + delannoy n m'
 
+-- 07: Calculating a polynomial
+evalPolynomial :: Floating x => [x] -> x -> x
+evalPolynomial list x = 
+    let
+      size = length list - 1
+      list' = zip list [size, size - 1..0]
+    in sum [a * (x ** fromIntegral deg) | (a, deg) <- list']
+
+-- 08: Cloning list items
+clone :: Int -> [a] -> [a]
+clone 0 _ = []
+clone _ [] = []
+clone n list = concat [replicate n a | a <- list]
+
+--
+
 -- TESTING MODULE
 testLesson04 :: IO ()
 testLesson04 = do
   print ("------: LESSON 04 :----------")
-  print ("01: eGcd    (3, 27):     ", eGcd 3 27)
-  print ("02: pow      (3, 4):     ", pow 3 4)
-  print ("02: tailPow  (3, 4):     ", tailPow 3 4)
-  print ("04: perfect    (28):     ", perfect 28)
-  print ("05: collatz     (7):     ", collatz 7)
-  print ("06: delannoy (3, 4):     ", delannoy 3 4)
+  print ("01: eGcd                  (3, 27):   ", eGcd 3 27)
+  print ("02: pow                    (3, 4):   ", pow 3 4)
+  print ("02: tailPow                (3, 4):   ", tailPow 3 4)
+  print ("04: perfect                  (28):   ", perfect 28)
+  print ("05: collatz                   (7):   ", collatz 7)
+  print ("06: delannoy               (3, 4):   ", delannoy 3 4)
+  print ("07: evalPolynomial ([2, 1, 5], 4):   ", evalPolynomial [2, 1, 5] 3)
+  print ("08: clone          (3, [1, 2, 3]):   ", clone 3 [1, 2, 3])
   print ("-------------------------------")
