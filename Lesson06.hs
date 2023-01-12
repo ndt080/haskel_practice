@@ -9,7 +9,7 @@ unfoldNatural = unfoldr (\a -> if a == 0 then Nothing else Just (a, a-1))
 unfoldToBinFn n = 
   if n == 0 
   then Nothing 
-  else let (a, b) = n `divMod` 2 in Just (b, a)
+  else let (a, b) = divMod n 2 in Just (b, a)
 
 unfoldToBin n = reverse $ unfoldr unfoldToBinFn n
 
@@ -44,6 +44,13 @@ foldToSyracuseFn x
 
 foldToSyracuse = unfoldr foldToSyracuseFn
 
+--07: Express a list of prime numbers not exceeding n through a sweep using the sieve of Eratosthenes
+sieve seq p = filter (\x -> x `mod` p /= 0) seq
+  
+unfoldToPrimes m = unfoldr (\(p:rest) -> 
+  if p > m 
+  then Nothing 
+  else Just (p, sieve rest p )) [2..]
 
 -- TESTING MODULE
 testLesson06 :: IO ()
@@ -53,6 +60,7 @@ testLesson06 = do
   print ("02: unfoldToBin              (26):   ", unfoldToBin 26)
   print ("03: foldBin         ([1,1,0,1,0]):   ", foldBin [1,1,0,1,0])
   print ("04: unfoldToPrimeDivs        (70):   ", unfoldToPrimeDivs 70)
-  print ("05: foldToFibonacci          (70):   ", foldToFibonacci 4)
-  print ("06: foldToSyracuse           (70):   ", foldToSyracuse 4)
+  print ("05: foldToFibonacci           (4):   ", foldToFibonacci 4)
+  print ("06: foldToSyracuse            (4):   ", foldToSyracuse 4)
+  print ("07: unfoldToPrimes           (99):   ", unfoldToPrimes 99)
   print ("-------------------------------")
