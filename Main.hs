@@ -5,5 +5,5 @@ import Lesson06
 
 main :: IO ()
 main = do
-  -- testLesson04
+  testLesson04
   testLesson06

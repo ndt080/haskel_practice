@@ -31,9 +31,9 @@ tailPow x p = tailPowFn x p 1
 
 -- 04: Perfect numbers
 perfect :: Integral a => a -> Bool
-perfect n = n == sum [i | i <- [1..n-1], n `mod` i == 0]
+perfect n = n == sum [i | i <- [1 .. n -1], n `mod` i == 0]
 
--- 05: The Syracuse Sequence 
+-- 05: The Syracuse Sequence
 collatzFn :: Int -> Int -> Int
 collatzFn x acc
   | x == 1 = acc
@@ -45,22 +45,20 @@ collatz x = collatzFn x 1
 
 -- 06: Delannois numbers
 delannoy :: Int -> Int -> Int
-delannoy n m 
+delannoy n m
   | n == 0 = 1
   | m == 0 = 1
-  | otherwise = 
-    let
-      n' = n - 1
-      m' = m - 1
-    in delannoy n' m + delannoy n' m' + delannoy n m'
+  | otherwise =
+    let n' = n - 1
+        m' = m - 1
+     in delannoy n' m + delannoy n' m' + delannoy n m'
 
 -- 07: Calculating a polynomial
 evalPolynomial :: Floating x => [x] -> x -> x
-evalPolynomial list x = 
-    let
-      size = length list - 1
-      list' = zip list [size, size - 1..0]
-    in sum [a * (x ** fromIntegral deg) | (a, deg) <- list']
+evalPolynomial list x =
+  let size = length list - 1
+      list' = zip list [size, size - 1 .. 0]
+   in sum [a * (x ** fromIntegral deg) | (a, deg) <- list']
 
 -- 08: Cloning list items
 clone :: Int -> [a] -> [a]
@@ -68,7 +66,10 @@ clone 0 _ = []
 clone _ [] = []
 clone n list = concat [replicate n a | a <- list]
 
---
+-- 10: List of Fibonacci numbers
+getFibonacciList :: Num a => [a] -> [a]
+getFibonacciList [] = []
+getFibonacciList (a : as) = a : getFibonacciList (as ++ [sum (a : as)])
 
 -- TESTING MODULE
 testLesson04 :: IO ()
@@ -82,4 +83,5 @@ testLesson04 = do
   print ("06: delannoy               (3, 4):   ", delannoy 3 4)
   print ("07: evalPolynomial ([2, 1, 5], 4):   ", evalPolynomial [2, 1, 5] 3)
   print ("08: clone          (3, [1, 2, 3]):   ", clone 3 [1, 2, 3])
+  print ("10: getFibonacciList             :   ", take 10 $ getFibonacciList [7, 3, 10, 0])
   print ("-------------------------------")
