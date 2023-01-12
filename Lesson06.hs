@@ -13,6 +13,14 @@ unfoldToBinFn n =
 
 unfoldToBin n = reverse $ unfoldr unfoldToBinFn n
 
+-- 03: Convert the list of digits by convolution to the value of a number
+foldBin = foldr (\x y -> x + 2 * y) 0 . reverse
+
+
+
+-- bintodec :: Integral i => i -> i
+-- bintodec 0 = 0
+-- bintodec i = 2 * bintodec (div i 10) + (mod i 10)
 
 -- TESTING MODULE
 testLesson06 :: IO ()
@@ -20,4 +28,6 @@ testLesson06 = do
   print ("------: LESSON 06 :----------")
   print ("01: unfoldNatural            (15):   ", unfoldNatural 15)
   print ("02: unfoldToBin              (26):   ", unfoldToBin 26)
+  print ("03: foldBin         ([1,1,0,1,0]):   ", foldBin [1,1,0,1,0])
+  -- print ("03: foldBin         ([1,1,0,1,0]):   ", bintodec 11010)
   print ("-------------------------------")
